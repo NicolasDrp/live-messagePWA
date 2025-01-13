@@ -1,24 +1,24 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { io } from "socket.io-client";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const socket = io();
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const form = document.getElementById("form") as HTMLFormElement;
+const input = document.getElementById("input") as HTMLInputElement;
+const messages = document.getElementById("messages") as HTMLUListElement;
+
+// Envoi du message
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (input.value) {
+    socket.emit("chat message", input.value); // Émettre le message au serveur
+    input.value = ""; // Réinitialiser le champ d'entrée
+  }
+});
+
+// Réception des messages
+socket.on("chat message", (msg: string) => {
+  const item = document.createElement("li");
+  item.textContent = msg;
+  messages.appendChild(item);
+  window.scrollTo(0, document.body.scrollHeight);
+});
