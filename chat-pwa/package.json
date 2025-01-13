@@ -4,13 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "dev": "concurrently \"vite\" \"node server.js\"",
+    "build": "vite build",
     "serve": "node server.js"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
+    "concurrently": "^9.1.2",
     "typescript": "~5.6.2",
     "vite": "^6.0.5"
   },

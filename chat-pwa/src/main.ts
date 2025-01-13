@@ -1,6 +1,7 @@
 import { io } from "socket.io-client";
 
-const socket = io();
+// Si vous êtes en développement, utilisez le port 5173 avec le proxy
+const socket = io(import.meta.env.DEV ? "http://localhost:5173" : "/");
 
 const form = document.getElementById("form") as HTMLFormElement;
 const input = document.getElementById("input") as HTMLInputElement;
@@ -10,8 +11,8 @@ const messages = document.getElementById("messages") as HTMLUListElement;
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   if (input.value) {
-    socket.emit("chat message", input.value); // Émettre le message au serveur
-    input.value = ""; // Réinitialiser le champ d'entrée
+    socket.emit("chat message", input.value);
+    input.value = "";
   }
 });
 
