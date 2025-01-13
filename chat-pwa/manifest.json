@@ -1,11 +1,14 @@
 {
   "name": "Chat PWA",
+  "description": "Une messagerie en direct",
   "start_url": "index.html",
-  "display": "standalone",
+  "lang": "fr",
+  "theme_color": "green",
+  "display": "minimal-ui",
   "icons": [
     {
-      "src": "public/logo smartLille.png",
-      "type": "image/png",
+      "src": "public/vite.svg",
+      "type": "image/svg+xml",
       "sizes": "512x512"
     }
   ]
