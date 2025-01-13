@@ -6,10 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "node server.js"
   },
   "devDependencies": {
+    "@types/node": "^22.10.5",
     "typescript": "~5.6.2",
     "vite": "^6.0.5"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
   }
 }
