@@ -5,11 +5,20 @@
   "lang": "fr",
   "theme_color": "green",
   "display": "minimal-ui",
+  "categories": ["social"],
   "icons": [
     {
-      "src": "public/vite.svg",
+      "src": "/vite.svg",
       "type": "image/svg+xml",
       "sizes": "512x512"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "form_factor": "wide"
     }
   ]
 }
