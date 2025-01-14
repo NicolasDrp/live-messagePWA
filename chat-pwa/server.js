@@ -18,9 +18,9 @@ app.use(express.static(path.join(__dirname, "dist")));
 io.on("connection", (socket) => {
   console.log("Un utilisateur s'est connecté");
 
-  socket.on("chat message", (msg) => {
-    console.log(`Message reçu : ${msg}`);
-    io.emit("chat message", msg); // Diffuser le message à tous les clients
+  socket.on("chat message", (data) => {
+    console.log(`Message reçu : ${data.message}`);
+    io.emit("chat message", data); // Diffuser le message avec l’userId
   });
 
   socket.on("disconnect", () => {
