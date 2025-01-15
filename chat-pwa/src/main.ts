@@ -1,4 +1,5 @@
 import { io } from "socket.io-client";
+import { chatBubble } from "./components/ChatBubble";
 
 // Si vous êtes en développement, utilisez le port 5173 avec le proxy
 const socket = io(import.meta.env.DEV ? "http://localhost:5173" : "/");
@@ -48,22 +49,27 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-// Réception des messages
 socket.on(
   "chat message",
-  (data: { userId: string; username: string; message: string }) => {
-    const item = document.createElement("li");
+  (data: {
+    userId: string;
+    username: string;
+    message: string;
+    timestamp: string;
+  }) => {
+    // Déterminer si l'utilisateur actuel est l'expéditeur
+    const isCurrentUser = data.userId === userId;
 
-    // Ajout du nom de l'utilisateur avant le message
-    item.innerHTML = `<strong>${data.username}:</strong> ${data.message} <br/> <i>${timestamp}</i>`;
-    // Ajout d’une classe spécifique pour les messages de l’utilisateur
-    if (data.userId === userId) {
-      item.classList.add("sent");
-    } else {
-      item.classList.add("received");
-    }
-
-    messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
+    // Utilisation du composant pour ajouter le message
+    chatBubble(
+      {
+        userId: data.userId,
+        username: data.username,
+        message: data.message,
+        isCurrentUser,
+        timestamp: timestamp,
+      },
+      messages
+    );
   }
 );
