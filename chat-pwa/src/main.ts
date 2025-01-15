@@ -6,6 +6,9 @@ const socket = io(import.meta.env.DEV ? "http://localhost:5173" : "/");
 // Génération d’un identifiant unique pour l’utilisateur
 const userId = Math.random().toString(36).substring(2, 15);
 
+// Heure de l'envoie du message
+const timestamp = new Date().toLocaleTimeString();
+
 const form = document.getElementById("form") as HTMLFormElement;
 const input = document.getElementById("input") as HTMLInputElement;
 const messages = document.getElementById("messages") as HTMLUListElement;
@@ -52,7 +55,7 @@ socket.on(
     const item = document.createElement("li");
 
     // Ajout du nom de l'utilisateur avant le message
-    item.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
+    item.innerHTML = `<strong>${data.username}:</strong> ${data.message} <br/> <i>${timestamp}</i>`;
     // Ajout d’une classe spécifique pour les messages de l’utilisateur
     if (data.userId === userId) {
       item.classList.add("sent");

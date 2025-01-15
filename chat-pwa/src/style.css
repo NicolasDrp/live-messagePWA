@@ -37,6 +37,10 @@ body {
   margin-left: auto;
 }
 
+i {
+  font-size: 10px;
+}
+
 #messages > li.received {
   background-color: #f1f1f1;
   color: #333;
