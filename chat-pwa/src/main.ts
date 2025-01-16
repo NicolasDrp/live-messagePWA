@@ -73,3 +73,9 @@ socket.on(
     );
   }
 );
+
+//enregistre le service Worker
+navigator.serviceWorker
+  .register("service-worker.js")
+  .then((r) => console.log(r))
+  .catch((e) => console.log(e));
