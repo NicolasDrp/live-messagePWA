@@ -7,9 +7,6 @@ const socket = io(import.meta.env.DEV ? "http://localhost:5173" : "/");
 // Génération d’un identifiant unique pour l’utilisateur
 const userId = Math.random().toString(36).substring(2, 15);
 
-// Heure de l'envoie du message
-const timestamp = new Date().toLocaleTimeString();
-
 const form = document.getElementById("form") as HTMLFormElement;
 const input = document.getElementById("input") as HTMLInputElement;
 const messages = document.getElementById("messages") as HTMLUListElement;
@@ -59,6 +56,9 @@ socket.on(
   }) => {
     // Déterminer si l'utilisateur actuel est l'expéditeur
     const isCurrentUser = data.userId === userId;
+
+    // Heure de l'envoie du message
+    const timestamp = new Date().toLocaleTimeString();
 
     // Utilisation du composant pour ajouter le message
     chatBubble(
